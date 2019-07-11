@@ -2,7 +2,7 @@
 const StorageCtrl = (() => {
   // Public methods
   return {
-    storeItem: function(item) {
+    storeItem:item=> {
       let items;
       // Check if any items in ls
       if (localStorage.getItem("items") === null) {
@@ -154,7 +154,7 @@ const ItemCtrl = (() => {
       let total = 0;
 
       // Loop through items and add cals
-      data.items.forEach(function(item) {
+      data.items.forEach(item => {
         total += item.calories;
       });
 
@@ -187,10 +187,10 @@ const UICtrl = (() => {
 
   // Public methods
   return {
-    populateItemList: function(items) {
+    populateItemList: items => {
       let html = "";
 
-      items.forEach(function(item) {
+      items.forEach( item => {
         html += `<li class="collection-item" id="item-${item.id}">
         <strong>${item.name}: </strong> <em>${item.calories} Calories</em>
         <a href="#" class="secondary-content">
@@ -208,7 +208,7 @@ const UICtrl = (() => {
         calories: document.querySelector(UISelectors.itemCaloriesInput).value
       };
     },
-    addListItem: function(item) {
+    addListItem: item => {
       // Show the list
       document.querySelector(UISelectors.itemList).style.display = "block";
       // Create li element
@@ -229,13 +229,13 @@ const UICtrl = (() => {
         .querySelector(UISelectors.itemList)
         .insertAdjacentElement("beforeend", li);
     },
-    updateListItem: function(item) {
+    updateListItem: item => {
       let listItems = document.querySelectorAll(UISelectors.listItems);
 
       // Turn Node list into array
       listItems = Array.from(listItems);
 
-      listItems.forEach(function(listItem) {
+      listItems.forEach(listItem => {
         const itemID = listItem.getAttribute("id");
 
         if (itemID === `item-${item.id}`) {
@@ -248,7 +248,7 @@ const UICtrl = (() => {
         }
       });
     },
-    deleteListItem: function(id) {
+    deleteListItem: id => {
       const itemID = `#item-${id}`;
       const item = document.querySelector(itemID);
       item.remove();
