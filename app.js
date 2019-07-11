@@ -272,14 +272,14 @@ const UICtrl = (() => {
       // Turn Node list into array
       listItems = Array.from(listItems);
 
-      listItems.forEach(function(item) {
+      listItems.forEach(item => {
         item.remove();
       });
     },
     hideList: () => {
       document.querySelector(UISelectors.itemList).style.display = "none";
     },
-    showTotalCalories: function(totalCalories) {
+    showTotalCalories: totalCalories => {
       document.querySelector(
         UISelectors.totalCalories
       ).textContent = totalCalories;
@@ -304,7 +304,7 @@ const UICtrl = (() => {
 })();
 
 // App Controller
-const App = (function(ItemCtrl, StorageCtrl, UICtrl) {
+const App = ((ItemCtrl, StorageCtrl, UICtrl) => {
   // Load event listeners
   const loadEventListeners = () => {
     // Get UI selectors
@@ -316,7 +316,7 @@ const App = (function(ItemCtrl, StorageCtrl, UICtrl) {
       .addEventListener("click", itemAddSubmit);
 
     // Disable submit on enter
-    document.addEventListener("keypress", function(e) {
+    document.addEventListener("keypress", e => {
       if (e.keyCode === 13 || e.which === 13) {
         e.preventDefault();
         return false;
@@ -350,7 +350,7 @@ const App = (function(ItemCtrl, StorageCtrl, UICtrl) {
   };
 
   // Add item submit
-  const itemAddSubmit = function(e) {
+  const itemAddSubmit = e => {
     // Get form input from UI Controller
     const input = UICtrl.getItemInput();
 
@@ -378,7 +378,7 @@ const App = (function(ItemCtrl, StorageCtrl, UICtrl) {
   };
 
   // Click edit item
-  const itemEditClick = function(e) {
+  const itemEditClick = e => {
     if (e.target.classList.contains("edit-item")) {
       // Get list item id (item-0, item-1)
       const listId = e.target.parentNode.parentNode.id;
@@ -403,7 +403,7 @@ const App = (function(ItemCtrl, StorageCtrl, UICtrl) {
   };
 
   // Update item submit
-  const itemUpdateSubmit = function(e) {
+  const itemUpdateSubmit = e => {
     // Get item input
     const input = UICtrl.getItemInput();
 
@@ -427,7 +427,7 @@ const App = (function(ItemCtrl, StorageCtrl, UICtrl) {
   };
 
   // Delete button event
-  const itemDeleteSubmit = function(e) {
+  const itemDeleteSubmit = e => {
     // Get current item
     const currentItem = ItemCtrl.getCurrentItem();
 
